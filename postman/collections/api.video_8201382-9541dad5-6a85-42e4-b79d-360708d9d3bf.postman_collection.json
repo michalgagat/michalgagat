@@ -1,0 +1,3315 @@
+{
+  "info": {
+    "_postman_id": "9541dad5-6a85-42e4-b79d-360708d9d3bf",
+    "name": "api.video",
+    "description": "Stream your videos on your website or your application within few lines of codes! Our cloud infrastructure allows you to host and broadcast your on demand and live videos worldwide thanks to our CDN. We encode on the go to facilitate immediate playback, enhancing viewer experiences across multiple devices and platforms. \n\nTo get started create your account [here](https://my.api.video)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Authenticate - Get Access Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+                  "postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "31c04f99-691c-4421-8427-9d39b00976b5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiKey\": \"{{apiKey}}\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/auth/api-key",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "auth",
+                "api-key"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Authenticate - Refresh token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+                  "postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "eaf16f2d-61ab-46cd-bf58-fc8fdef00cf5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"refreshToken\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/auth/refresh",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "e194c722-0340-46d6-bdeb-05832c8e2491"
+    },
+    {
+      "name": "Captions",
+      "item": [
+        {
+          "name": "Upload Caption",
+          "id": "1f9c09d6-55da-46f7-85d9-526a907bfd4e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "type": "file"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/captions/en",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "captions",
+                "en"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show Caption",
+          "id": "45f739f5-e363-4f03-ab9c-4d5ee0717d70",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/captions/en",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "captions",
+                "en"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Caption",
+          "id": "169769af-bb50-4ea3-a86c-78f7c2b81067",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/captions",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "captions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Caption",
+          "id": "e70cdc49-09dd-4df2-b047-5b19c7560a21",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"default\": false\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/captions/en",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "captions",
+                "en"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Caption",
+          "id": "a4017866-27bd-468d-a849-bf66bd6b80b0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "type": "file",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/captions/en",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "captions",
+                "en"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "08a08c8b-8ee6-401d-b3cf-64cb4761ab50",
+      "description": "You can add as many subtitle tracks as you want to a video.\n\nOne of the subtitles may be used as a default track, which will be loaded in the player automatically.\n",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chapters",
+      "item": [
+        {
+          "name": "Upload Chapter",
+          "id": "d2dfc7a7-1111-434e-ae1a-812c5a7bfed0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "type": "file"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/chapters/en",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "chapters",
+                "en"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show Chapter",
+          "id": "ff4ea297-a839-4d4e-be9b-36ec84df879c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/chapters/en",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "chapters",
+                "en"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Chapter",
+          "id": "6a10ee3e-995e-475c-ab6c-923e881873b1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/chapters",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "chapters"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Chapter",
+          "id": "23ddb58b-ce92-4e61-97b9-6a6d3828e74f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "type": "file",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/chapters/en",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "chapters",
+                "en"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "c5ba9926-7a40-4757-b04e-a896c23ccfe3",
+      "description": "You can add as many subtitle tracks as you want to a video.\n\nOne of the subtitles may be used as a default track, which will be loaded in the player automatically.\n",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Account",
+      "item": [
+        {
+          "name": "Show account",
+          "id": "5592bb9e-f33c-438a-b9b1-41ff17ae4042",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/account",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "account"
+              ]
+            },
+            "description": "Provide quota usage informations like quota used, quota total, quota remaining and next reset date."
+          },
+          "response": []
+        }
+      ],
+      "id": "455da463-38e1-453f-b0cf-9f012cf2f5ec",
+      "description": "Provide quota usage informations like quota used, quota total, quota remaining and next reset date.",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Analytics videos project Today",
+          "id": "130c1adb-4beb-44dc-bc12-f1fffc0df9e3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics videos project Today Paginated",
+          "id": "7f53d0be-8110-471b-ba6f-bd86bbc3dd2c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos?pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics videos project For a day Paginated",
+          "id": "0fe97645-4fc5-44b2-8f47-34064f4f889f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos?period=2019-01-01&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics videos project For a week Paginated",
+          "id": "abc20571-31ab-4bd8-9373-d6cf1f95e233",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos?period=2019-W01&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-W01"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics videos project For a month Paginated",
+          "id": "69f96b3c-a26d-4087-9e10-1258cf6bfdef",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos?period=2019-01&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics videos project For a year Paginated",
+          "id": "e23b7f31-b0c8-42dd-bb71-a7df01e68be6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos?period=2019&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics videos project For a date range Paginated",
+          "id": "a2569a85-a505-4e54-871a-60a09b998fd6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos?period=2019-01-01/2019-02-15&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01/2019-02-15"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics lives project Today",
+          "id": "49a8afa2-5cf6-4889-a8f3-9f76656045fb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics lives project Today Paginated",
+          "id": "5a6a798d-7099-4cef-bcd5-5c566d6257a8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams?pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics lives project For a day Paginated",
+          "id": "e7e60df2-2d59-4a75-a70b-2227761592d9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams?period=2019-01-01&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics lives project For a week Paginated",
+          "id": "d9b874d2-20bd-43e1-8765-ecff7cd81b2d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams?period=2019-W01&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-W01"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics lives project For a month Paginated",
+          "id": "0adbdd68-c94f-4f0e-a772-070cac603d69",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams?period=2019-01-01&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics lives project For a year Paginated",
+          "id": "f76e7135-733d-438c-812f-2d30ea28a296",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams?period=2019&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics lives project For a date range Paginated",
+          "id": "c3350381-c064-4dfe-9094-86fb1c4a0ba6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams?period=2019-01-01/2019-02-15&pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01/2019-02-15"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics video Today",
+          "id": "e4c4d8c7-c841-4c80-90b4-033869a50558",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos/{{videoId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics video for a day",
+          "id": "d5fac523-59f9-479b-a8ab-90c9f2c532ed",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos/{{videoId}}?period=2019-01-01",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos",
+                "{{videoId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics video for a week",
+          "id": "a2dff0f9-4832-421d-b147-896c1f7ef98b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos/{{videoId}}?period=2019-W01",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos",
+                "{{videoId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-W01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics video for a month",
+          "id": "fe078dd2-2b4f-4691-83ac-efec7ec3e1ec",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos/{{videoId}}?period=2019-01",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos",
+                "{{videoId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics video for a year",
+          "id": "b8effdf4-c88b-44ee-9160-4f52affe9f35",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos/{{videoId}}?period=2019",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos",
+                "{{videoId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics video for a date range",
+          "id": "bf5160fd-bc80-4566-afb0-e93f6e97b1b9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/videos/{{videoId}}?period=2019-01-01/2019-01-05",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "videos",
+                "{{videoId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01/2019-01-05"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics live Today",
+          "id": "3c4516f4-f022-492d-bba0-3018ba9302d6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams/{{liveStreamId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams",
+                "{{liveStreamId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics live for a day",
+          "id": "408ceb8b-a142-410e-8a79-433b4017d3cd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams/{{liveStreamId}}?period=2019-01-01/2019-01-05",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams",
+                "{{liveStreamId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01/2019-01-05"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics live for a week",
+          "id": "33068b1e-96b0-4ec1-971b-daa4a2d20b81",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams/{{liveStreamId}}?period=2019-W01",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams",
+                "{{liveStreamId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-W01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics live for a month",
+          "id": "d312bae3-5b8b-4d41-8e76-f1295c556bee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams/{{liveStreamId}}?period=2019-01",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams",
+                "{{liveStreamId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics live for a year",
+          "id": "1bd80c12-a7a2-4fb2-946a-b2502951b8d2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams/{{liveStreamId}}?period=2019",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams",
+                "{{liveStreamId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics live for a date range",
+          "id": "f7f89fc4-e162-46ea-a84e-93ee9376d9e3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/analytics/live-streams/{{liveStreamId}}?period=2019-01-01",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "live-streams",
+                "{{liveStreamId}}"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "2019-01-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analytics Session Events",
+          "id": "270b2349-4f17-47f3-b35b-34f9cefdb5f0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{domain}}/analytics/sessions/{{sessionId}}/events?currentPage=1&pageSize=25",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "analytics",
+                "sessions",
+                "{{sessionId}}",
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "25"
+                }
+              ]
+            },
+            "description": "Get session's events analytics for building engagement"
+          },
+          "response": []
+        }
+      ],
+      "id": "04e531b8-5a89-4a1c-bb08-747c636bc5d8"
+    },
+    {
+      "name": "Live",
+      "item": [
+        {
+          "name": "Create a Live",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"liveStreamId\", jsonData.liveStreamId);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "8ce7a493-708b-4e3f-8e7c-1918b66689a4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Test live\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/live-streams",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "live-streams"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a Live",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"liveStreamId\", jsonData.liveStreamId);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "7dd7aa98-5fa1-49fc-898c-d8c5443e8006",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"record\": true\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/live-streams/{{liveStreamId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "live-streams",
+                "{{liveStreamId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload a Live Thumbnail",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "id": "e4729afd-0d91-47e6-849d-fb8aeac814d6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "type": "file"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/live-streams/{{liveStreamId}}/thumbnail",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "live-streams",
+                "{{liveStreamId}}",
+                "thumbnail"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Live Streams",
+          "id": "b7b3c9c2-07fd-4500-ab0e-18fbab0ae73c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/live-streams",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "live-streams"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Live Streams Paginated",
+          "id": "41b57f9d-8b5c-4be3-b822-fc38d88e3d50",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/live-streams?pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "live-streams"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show Live Stream",
+          "id": "56bdba50-8b79-44fb-bdc4-61e73b7f6514",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/live-streams/{{liveStreamId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "live-streams",
+                "{{liveStreamId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Live Stream",
+          "id": "74e81f4f-eb01-455e-b575-cdab1057c07b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{domain}}/live-streams/{{liveStreamId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "live-streams",
+                "{{liveStreamId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "a1ab55bb-e93c-4d05-9171-d9fd3f6f5adf"
+    },
+    {
+      "name": "Players",
+      "item": [
+        {
+          "name": "Create Player",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"playerId\", jsonData.playerId);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "9d9834d1-6652-4a08-b293-014cafb23e8a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{domain}}/players",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "players"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show Player",
+          "id": "97ab9565-9092-4359-9977-3f35de765051",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/players/{{playerId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "players",
+                "{{playerId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Player",
+          "id": "86e6a5f2-3763-4bb2-9651-bb69fa90c9d1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{domain}}/players/{{playerId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "players",
+                "{{playerId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Players",
+          "id": "90a5dede-5090-4019-b1a0-a9be70629746",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/players",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "players"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Players Paginated",
+          "id": "ff2c8f5a-79e1-4ed9-815e-1aeb53eb6b5b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/players?pageSize=50&currentPage=1",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "players"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload player logo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "c44dbe7a-b487-4a49-8613-939f02de75b7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "value": null
+                },
+                {
+                  "key": "link",
+                  "value": "https://api.video",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/players/{{playerId}}/logo",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "players",
+                "{{playerId}}",
+                "logo"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Patch Player",
+          "id": "7fafcf59-eef1-427d-8b9d-a437f2e16f42",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"shapeMargin\": 10,\n    \"shapeRadius\": 3,\n    \"shapeAspect\": \"flat\",\n    \"shapeBackgroundTop\": \"rgba(35, 255, 0, .7)\",\n    \"shapeBackgroundBottom\": \"rgba(35, 255, 0, .8)\",\n    \"text\": \"rgba(255, 255, 255, .95)\",\n    \"link\": \"rgba(255, 0, 0, .95)\",\n    \"linkHover\": \"rgba(250, 2, 216, .75)\",\n    \"linkActive\": \"rgba( 250, 2, 216, .75)\",\n    \"trackPlayed\": \"rgba(250, 2, 216, .95)\",\n    \"trackUnplayed\": \"rgba(250, 2, 216, .1)\",\n    \"trackBackground\": \"rgba(0, 0, 0, 0)\",\n    \"backgroundTop\": \"rgba(72, 4, 45, 1)\",\n    \"backgroundBottom\": \"rgba(94, 95, 89, 1)\",\n    \"backgroundText\": \"rgba(250, 2, 216, .95)\",\n    \"language\": \"fr\",\n    \"enableApi\": true,\n    \"enableControls\": true,\n    \"forceAutoplay\": false,\n    \"hideTitle\": false,\n    \"forceLoop\": false\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/players/{{playerId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "players",
+                "{{playerId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "2b66971f-4067-4482-9e1b-e9e2056e7f19"
+    },
+    {
+      "name": "Videos",
+      "item": [
+        {
+          "name": "Create Video",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"videoId\", jsonData.videoId);",
+                  "postman.setEnvironmentVariable(\"source\", jsonData.source.uri);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "099c977b-c101-4301-a054-15d04d3c209a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Test create video\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/videos",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Video",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"videoId\", jsonData.videoId);",
+                  "postman.setEnvironmentVariable(\"source\", jsonData.source.uri);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "effe2e5a-95ea-4c2d-8c89-c73320d842a6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Test create description\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Set public video",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "id": "1dcf2c24-4dcf-440a-9fae-ba41db48976b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"public\": true\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Set private video",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "201a3325-992b-4e28-8181-fd618450ece9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"public\": false\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload video thumbnail",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ],
+          "id": "7b54beb1-0ba4-4e7f-8260-96eaa6cc5492",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "type": "file"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/thumbnail",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "thumbnail"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Pick video thumbnail with timecode",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"videoId\", jsonData.videoId);",
+                  "postman.setEnvironmentVariable(\"source\", jsonData.source.uri);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "ef6ff8f2-c888-461a-bc46-e78d52c7d8ec",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"timecode\": \"00:00:40.04\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/thumbnail",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "thumbnail"
+              ]
+            },
+            "description": "Pick a thumbnail from the given time code.\n\nIt may take up to 1h before the new thumbnail to be delivered by our CDN.\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Video (Size <= 128Mb)",
+          "id": "cd9f2f8d-5e9a-4389-9fed-02d4ed797b7a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "",
+                "value": ""
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "value": null
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}{{source}}",
+              "host": [
+                "{{domain}}{{source}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add PlayerId to Video",
+          "id": "fa0a4f2f-ca82-4e4a-af4f-d0b5bf6e105f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"playerId\": \"{{playerId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            },
+            "description": "Patch with playerId"
+          },
+          "response": []
+        },
+        {
+          "name": "Show Video",
+          "id": "602d9a4b-35aa-4294-90a5-ac975a07cd54",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show Video Status",
+          "id": "6c78c1ab-b505-409e-a348-88d934cc413b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}/status",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Video",
+          "id": "76fe7066-7ba2-4a9e-9912-47e911bf5c3f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{domain}}/videos/{{videoId}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos",
+                "{{videoId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Videos with Pagination",
+          "id": "f55390e7-acd5-4736-b7b4-9e4bf3cbfa23",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{domain}}/videos?currentPage=1&pageSize=50&sortBy=publishedAt&sortOrder=desc",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "currentPage",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "50"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "publishedAt"
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "desc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload delegated video",
+          "id": "20aa5232-50d4-4e43-9bbd-0500b3e91807",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": null,
+                  "type": "file"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{domain}}/upload?token={{token}}",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "upload"
+              ],
+              "query": [
+                {
+                  "key": "token",
+                  "value": "{{token}}"
+                }
+              ]
+            },
+            "description": "\nFor the moment, tokens allow only to upload files for someone else's account.\n\nWhen given a token, anyone can upload a file to the URI https://ws.api.video/upload?token=<insert your token here>."
+          },
+          "response": []
+        }
+      ],
+      "id": "ccc05e0a-0944-415f-b21c-88420f1baf0e"
+    },
+    {
+      "name": "Tokens",
+      "item": [
+        {
+          "name": "Generate a token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = JSON.parse(responseBody);",
+                  "postman.setEnvironmentVariable(\"token\", jsonData.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "id": "1de93a8f-4cad-461c-9735-4f08e3376e80",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{access_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{domain}}/tokens",
+              "host": [
+                "{{domain}}"
+              ],
+              "path": [
+                "tokens"
+              ]
+            },
+            "description": "For the moment, tokens allow only to upload files for someone else's account.\n\nWhen given a token, anyone can upload a file to the URI https://ws.api.video/upload?token=<insert your token here>."
+          },
+          "response": []
+        }
+      ],
+      "id": "0e137a27-c7fe-462f-a479-370c2d3918d7",
+      "description": "\nFor the moment, tokens allow only to upload files for someone else's account.\n\nWhen given a token, anyone can upload a file to the URI https://ws.api.video/upload?token=<insert your token here>.",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "00c4d73e-2d95-44aa-ad4c-e9e3eeab4587",
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "id": "23435530-5f89-475c-8069-a75097015d87",
+      "key": "refresh_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "id": "de757e4c-2947-4e1c-a6ff-5843f77fdc5d",
+      "key": "apiKey",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
